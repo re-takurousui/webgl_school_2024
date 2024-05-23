@@ -29,7 +29,7 @@ class ThreeApp {
    * レンダラー定義のための定数
    */
   static RENDERER_PARAM = {
-    clearColor: 0x000000,       // 画面をクリアする色
+    clearColor: 0x184da3,       // 画面をクリアする色
     width: window.innerWidth,   // レンダラーに設定する幅
     height: window.innerHeight, // レンダラーに設定する高さ
   };
