@@ -19,7 +19,7 @@ class ThreeApp {
     // 描画する空間のニアクリップ面（最近面）
     near: 0.1,
     // 描画する空間のファークリップ面（最遠面）
-    far: 60.0,
+    far: 150.0,
     // カメラの座標
     position: new THREE.Vector3(0.0, 0.0,40.0),
     // カメラの注視点
@@ -403,34 +403,34 @@ class ThreeApp {
     this.scene.add(this.box143);
     
     // 各種メッシュは少しずつ動かしておく
-    this.box.position.set(-5.0, 14.0, 15.0);//1
-    this.box01.position.set(-3.0, 14.0, -2.0);
+    this.box.position.set(-20.0, 8.0, 15.0);//1
+    this.box01.position.set(-7.0, 14.0, -2.0);
     this.box02.position.set(-1.0, 14.0, 1.0);
-    this.box03.position.set(1.0, 14.0, 1.0);
-    this.box04.position.set(3.0, 14.0, -3.0);
-    this.box05.position.set(-7.0, 12.0, 0.0);//2
-    this.box06.position.set(-5.0, 12.0, 1.0);
+    this.box03.position.set(5.0, 16.0, 1.0);
+    this.box04.position.set(5.0, 14.0, -5.0);
+    this.box05.position.set(-11.0, 9.0, 0.0);//2
+    this.box06.position.set(5.0, 12.0, 1.0);
     this.box07.position.set(-3.0, 12.0, 14.0);
     this.box08.position.set(-1.0, 12.0, 4.0);
-    this.box09.position.set(1.0, 12.0, 42.0);
+    this.box09.position.set(5.0, 12.0, 42.0);
     this.box10.position.set(3.0, 12.0, 1.0);
     this.box11.position.set(5.0, 12.0, -7.0);
     this.box12.position.set(7.0, 12.0, 1.0);
-    this.box13.position.set(9.0, 12.0, 0.0);
+    this.box13.position.set(17.0, 12.0, 0.0);
     this.box14.position.set(11.0, 12.0, -8.0);
-    this.box15.position.set(-7.0, 10.0, 3.0);//3
+    this.box15.position.set(-17.0, 10.0, 3.0);//3
     this.box16.position.set(-5.0, 10.0, 0.0);
     this.box17.position.set(-3.0, 10.0, 2.0);
     this.box18.position.set(-1.0, 10.0, -42.0);
     this.box19.position.set(1.0, 10.0, 10.0);
-    this.box20.position.set(3.0, 10.0, 64.0);
-    this.box21.position.set(5.0, 10.0, -9.0);
+    this.box20.position.set(6.0, 10.0, 64.0);
+    this.box21.position.set(9.0, 10.0, -9.0);
     this.box22.position.set(-9.0, 8.0, 3.0);//4
     this.box23.position.set(-7.0, 8.0, 5.0);
     this.box24.position.set(-5.0, 8.0, 0.0);
     this.box25.position.set(-3.0, 8.0, -5.0);
     this.box26.position.set(-1.0, 8.0, 2.0);
-    this.box27.position.set(1.0, 8.0, 8.0);
+    this.box27.position.set(8.0, 8.0, 8.0);
     this.box28.position.set(3.0, 8.0, 3.0);
     this.box29.position.set(5.0, 8.0, 2.0);
     this.box30.position.set(7.0, 8.0, -4.0);
@@ -455,7 +455,7 @@ class ThreeApp {
     this.box49.position.set(3.0, 4.0, 0.0);
     this.box50.position.set(5.0, 4.0, 1.0);
     this.box51.position.set(7.0, 4.0, 7.0);
-    this.box52.position.set(9.0, 4.0, 5.0);
+    this.box52.position.set(30.0, 4.0, 5.0);
     this.box53.position.set(-5.0, 2.0, 3.0);//7
     this.box54.position.set(-3.0, 2.0, -0.0);
     this.box55.position.set(-1.0, 2.0, 2.0);
@@ -469,7 +469,7 @@ class ThreeApp {
     this.box63.position.set(-1.0, 0.0, 1.0);
     this.box64.position.set(1.0, 0.0, 0.0);
     this.box65.position.set(3.0, 0.0, 3.0);
-    this.box66.position.set(-9.0, -2.0, 6.0);//9
+    this.box66.position.set(-15.0, -2.0, 10.0);//9
     this.box67.position.set(-7.0, -2.0, 8.0);
     this.box68.position.set(-5.0, -2.0, 9.0);
     this.box69.position.set(-3.0, -2.0, 0.0);
@@ -481,26 +481,26 @@ class ThreeApp {
     this.box75.position.set(9.0, -2.0, 3.0);
     this.box76.position.set(-11.0, -4.0, 2.0);//10
     this.box77.position.set(-9.0, -4.0, 9.0);
-    this.box78.position.set(-7.0, -4.0, 5.0);
+    this.box78.position.set(-7.0, -4.0, -10.0);
     this.box79.position.set(-5.0, -4.0, 3.0);
     this.box80.position.set(-3.0, -4.0, 1.0);
     this.box81.position.set(-1.0, -4.0, 0.0);
     this.box82.position.set(1.0, -4.0, 1.0);
-    this.box83.position.set(3.0, -4.0, 7.0);
+    this.box83.position.set(3.0, -4.0, -77.0);
     this.box84.position.set(5.0, -4.0, 0.0);
     this.box85.position.set(7.0, -4.0, -6.0);
     this.box86.position.set(9.0, -4.0, 3.0);
-    this.box87.position.set(11.0, -4.0, 2.0);
+    this.box87.position.set(15.0, -4.0, 2.0);
     this.box88.position.set(-11.0, -6.0, 8.0);//11
     this.box89.position.set(-9.0, -6.0, 5.0);
-    this.box90.position.set(-7.0, -6.0, 3.0);
+    this.box90.position.set(-7.0, -6.0, -33.0);
     this.box91.position.set(-5.0, -6.0, 7.0);
     this.box92.position.set(-3.0, -6.0, 9.0);
     this.box93.position.set(-1.0, -6.0, 3.0);
     this.box94.position.set(1.0, -6.0, -1.0);
     this.box95.position.set(3.0, -6.0, 0.0);
     this.box96.position.set(5.0, -6.0, 2.0);
-    this.box97.position.set(7.0, -6.0, 4.0);
+    this.box97.position.set(7.0, -6.0, -64.0);
     this.box98.position.set(9.0, -6.0, 7.0);
     this.box99.position.set(11.0, -6.0, 8.0);
     this.box100.position.set(-11.0, -8.0, -1.0);//12
@@ -508,8 +508,8 @@ class ThreeApp {
     this.box102.position.set(-7.0, -8.0, 1.0);
     this.box103.position.set(-5.0, -8.0, 2.0);
     this.box104.position.set(-3.0, -8.0, 8.0);
-    this.box105.position.set(-1.0, -8.0, 14.0);
-    this.box106.position.set(1.0, -8.0, 30.0);
+    this.box105.position.set(-1.0, -8.0, -94.0);
+    this.box106.position.set(1.0, -8.0, -30.0);
     this.box107.position.set(3.0, -8.0, -24.0);
     this.box108.position.set(5.0, -8.0, 6.0);
     this.box109.position.set(7.0, -8.0, 8.0);
@@ -523,7 +523,7 @@ class ThreeApp {
     this.box117.position.set(-1.0, -10.0, 4.0);
     this.box118.position.set(1.0, -10.0, 99.0);
     this.box119.position.set(3.0, -10.0, -8.0);
-    this.box120.position.set(5.0, -10.0, 24.0);
+    this.box120.position.set(5.0, -10.0, -24.0);
     this.box121.position.set(7.0, -10.0, 44.0);
     this.box122.position.set(9.0, -10.0, 77.0);
     this.box123.position.set(11.0, -10.0, 8.0);
@@ -756,7 +756,6 @@ class ThreeApp {
     // フラグに応じてオブジェクトの状態を変化させる
     if (this.isDown === true) {
       this.box.position.set(-5.0, 14.0, 0.0);//1
-      // this.box.rotation.z += 0.03;//1
       this.box01.position.set(-3.0, 14.0, 0.0);
       this.box02.position.set(-1.0, 14.0, 0.0);
       this.box03.position.set(1.0, 14.0, 0.0);
