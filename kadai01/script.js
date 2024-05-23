@@ -112,7 +112,7 @@ class ThreeApp {
     this.material = new THREE.MeshPhongMaterial(ThreeApp.MATERIAL_PARAM);
 
     // 各種ジオメトリからメッシュを生成し、シーンに追加する
-    this.boxGeometry = new THREE.BoxGeometry(1.0, 1.0, 1.0);
+    this.boxGeometry = new THREE.BoxGeometry(2.0, 2.0, 2.0);
     this.box = new THREE.Mesh(this.boxGeometry, this.material);
     this.scene.add(this.box);
     this.box01 = new THREE.Mesh(this.boxGeometry, this.material);
