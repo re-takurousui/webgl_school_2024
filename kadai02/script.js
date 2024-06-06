@@ -1,10 +1,10 @@
-import * as THREE from './lib/three.module.js';
-import { OrbitControls } from './lib/OrbitControls.js';
+import * as THREE from '../lib/three.module.js';
+import { OrbitControls } from '../lib/OrbitControls.js';
 
 window.addEventListener('DOMContentLoaded', async () => {
   const wrapper = document.querySelector('#webgl');
   const app = new ThreeApp(wrapper);
-  await app.load();
+  // await app.load();
   app.render();
 }, false);
 
@@ -17,7 +17,7 @@ class ThreeApp {
     aspect: window.innerWidth / window.innerHeight,
     near: 0.1,
     far: 150.0,
-    position: new THREE.Vector3(0.0, 0.0, 10.0),
+    position: new THREE.Vector3(0.0, 0.0, 15.0),
     lookAt: new THREE.Vector3(0.0, 0.0, 0.0),
   };
   /**
@@ -47,7 +47,7 @@ class ThreeApp {
    * マテリアル定義のための定数
    */
   static MATERIAL_PARAM = {
-    color: 0xff0000,
+    color: 0xa00404,
   };
 
   renderer;         // レンダラ
@@ -61,12 +61,12 @@ class ThreeApp {
   coneGeometry;    // トーラスジオメトリ
   cone;
   coneArray;        // トーラスメッシュの配列
-  wrap;
+  cylinderGeometry;
+  cylinder;
   wrapArray;
   controls;         // オービットコントロール
   axesHelper;       // 軸ヘルパー
   isDown;           // キーの押下状態用フラグ
-  circle;            // グループ @@@
 
   /**
    * コンストラクタ
@@ -112,19 +112,24 @@ class ThreeApp {
     // マテリアル
     this.material = new THREE.MeshPhongMaterial(ThreeApp.MATERIAL_PARAM);
 
-    // - グループを使う
+    //グループ
     this.circle = new THREE.Group();
     this.wrap = new THREE.Group();
     this.wrap.add(this.circle);
     this.scene.add(this.wrap);
 
     //ボックス
-    this.boxGeometry = new THREE.BoxGeometry(1.0, 1.0, 1.0);
+    this.boxGeometry = new THREE.BoxGeometry(.7, .7, .7);
     this.box = new THREE.Mesh(this.boxGeometry, this.material);
     this.circle.add(this.box); 
 
+    //棒
+    this.cylinderGeometry = new THREE.CylinderGeometry(0.1, 0.1, 10.0);
+    this.cylinder = new THREE.Mesh(this.cylinderGeometry, this.material);
+    this.wrap.add(this.cylinder); 
+
     //三角錐
-    const coneCount = 8;
+    const coneCount = 36;
     this.coneGeometry = new THREE.ConeGeometry(0.5, 1.0, 10);
     this.coneArray = [];   
 
@@ -136,11 +141,39 @@ class ThreeApp {
       { x: 0.0, y: -3.0, z: 0.0 },
       { x: -2.0, y: -2.0, z: 0.0 },
       { x: -3.0, y: 0.0, z: 0.0 },
-      { x: -2.0, y: 2.0, z: 0.0 }
+      { x: -2.0, y: 2.0, z: 0.0 },
+      { x: -.7, y: 1.9, z: 1 },//2行目
+      { x: .6, y: 1.8, z: 1 },
+      { x: 1.7, y: .7, z: 1 },
+      { x: 1.7, y: -.7, z: 1 },
+      { x: .7, y: -1.8, z: 1 },
+      { x: -.7, y: -1.8, z: 1 },
+      { x: -1.9, y: -.8, z: 1 },
+      { x: -2.0, y: 0.7, z: 1 },
+      { x: -.7, y: 1.9, z: -1 },//3
+      { x: .6, y: 1.8, z: -1 },
+      { x: 1.7, y: .7, z: -1 },
+      { x: 1.7, y: -.7, z: -1 },
+      { x: .7, y: -1.8, z: -1 },
+      { x: -.7, y: -1.8, z: -1 },
+      { x: -1.9, y: -.8, z: -1 },
+      { x: -2.0, y: 0.7, z: -1 },  
+      { x: -1, y: .8, z: 2 },//4行目
+      { x: .2, y: 1, z: 2 },
+      { x: 1.15, y: .0, z: 2 },
+      { x: .8, y: -.9, z: 2 },
+      { x: -.3, y: -1.0, z: 2 },
+      { x: -1.2, y: -.3, z: 2 },
+      { x: -1, y: .8, z: -2 },//4行目
+      { x: .2, y: 1, z: -2 },
+      { x: 1.15, y: .0, z: -2 },
+      { x: .8, y: -.9, z: -2 },
+      { x: -.3, y: -1.0, z: -2 },
+      { x: -1.2, y: -.3, z: -2 },
     ];
     
     const rotations = [
-      { x: 0, y: 0, z: -.7 },
+      { x: 0, y: 0, z: -1.2 },
       { x: 0, y: 0, z: Math.PI / -1.8 },
       { x: 0, y: 0, z: Math.PI / -1.2 },
       { x: 0, y: 0, z: Math.PI / -.9 },
@@ -148,6 +181,34 @@ class ThreeApp {
       { x: 0, y: 0, z: Math.PI / -.6 },
       { x: 0, y: 0, z: Math.PI / -.5 },
       { x: 0, y: 0, z: Math.PI / -5.6 },
+      { x: 0, y: 0, z: Math.PI / -3.5 },//2行目
+      { x: 0, y: 0, z: Math.PI / -1.5 },
+      { x: 0, y: 0, z: Math.PI / -1.2 },
+      { x: 0, y: 0, z: Math.PI / -.9 },
+      { x: 0, y: 0, z: Math.PI / 1.4 },
+      { x: 0, y: 0, z: Math.PI / 3.9 },
+      { x: 0, y: 0, z: Math.PI / 5 },
+      { x: 0, y: 0, z: Math.PI / -5.6 },
+      { x: 0, y: 0, z: Math.PI / -3.5 },//3行目
+      { x: 0, y: 0, z: Math.PI / -1.5 },
+      { x: 0, y: 0, z: Math.PI / -1.2 },
+      { x: 0, y: 0, z: Math.PI / -.9 },
+      { x: 0, y: 0, z: Math.PI / 1.4 },
+      { x: 0, y: 0, z: Math.PI / 3.9 },
+      { x: 0, y: 0, z: Math.PI / 5 },
+      { x: 0, y: 0, z: Math.PI / -5.6 },
+      { x: 0, y: 0, z: Math.PI / -3.5 },//4行目
+      { x: 0, y: 0, z: Math.PI / -1.8 },
+      { x: 0, y: 0, z: Math.PI / -1.1 },
+      { x: 0, y: 0, z: Math.PI / -.8 },
+      { x: 0, y: 0, z: Math.PI / 2.9 },
+      { x: 0, y: 0, z: Math.PI / 8 },
+      { x: 0, y: 0, z: Math.PI / -3.5 },//4行目
+      { x: 0, y: 0, z: Math.PI / -1.8 },
+      { x: 0, y: 0, z: Math.PI / -1.1 },
+      { x: 0, y: 0, z: Math.PI / -.8 },
+      { x: 0, y: 0, z: Math.PI / 2.9 },
+      { x: 0, y: 0, z: Math.PI / 8 },
     ];
     
     for (let i = 0; i < coneCount; i++) {
@@ -156,18 +217,8 @@ class ThreeApp {
       cone.rotation.set(rotations[i].x, rotations[i].y, rotations[i].z);
       this.circle.add(cone);
     }
-
-    //wrap複数
-    // const aaa = [
-    //   {x: -10, y: 6, z: 5},
-    //   {x: 1, y: 1, z: 5},
-    //   {x: 5, y: -1, z: 1},
-    // ];
-    // let wrapCount = 3;
-    // let wrapArray = [];
-    // for(let i = 0; i < wrapCount; i++) {
-    //   this.wrap.position.set(aaa[i].x, aaa[i].y, aaa[i].z);
-    // }
+    this.cylinder.position.set(0, -5, 0);
+    this.wrap.position.set(0, 1.3, 0);
 
     // 軸ヘルパー
     const axesBarLength = 5.0;
@@ -204,16 +255,16 @@ class ThreeApp {
     }, false);
   }
 
-  load() {
-    return new Promise((resolve) => {
-      const imagePath = './sample.jpg';
-      const loader = new THREE.TextureLoader();
-      loader.load(imagePath, (texture) => {
-        this.material.map = texture;
-        resolve();
-      });
-    });
-  }
+  // load() {
+  //   return new Promise((resolve) => {
+  //     const imagePath = './sample.jpg';
+  //     const loader = new THREE.TextureLoader();
+  //     loader.load(imagePath, (texture) => {
+  //       this.material.map = texture;
+  //       resolve();
+  //     });
+  //   });
+  // }
 
   /* 描画処理 */
   render() {
@@ -225,7 +276,7 @@ class ThreeApp {
 
     // フラグに応じてオブジェクトの状態を変化させる
     if (this.isDown === true) {
-      this.circle.rotation.z += 0.05;
+      this.circle.rotation.z += 0.03;
       this.box.rotation.y -= 0.01;
       this.wrap.rotation.y += 0.01; 
     }
