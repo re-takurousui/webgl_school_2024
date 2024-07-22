@@ -38,7 +38,7 @@ class ThreeApp {
 		intensity: 0.1,
 	};
 
-	static FAN_CONFIG = {
+	static MACHINE_CONFIG = {
 		bladeNum: 1,
 		bladeGeometory: {
 			color: 0x5c50e6,
@@ -57,9 +57,9 @@ class ThreeApp {
   /**
    * レイが交差した際のマテリアル定義のための定数 @@@
    */
-  static INTERSECTION_MATERIAL_PARAM = {
-    color: 0x00ff00,
-  };
+  // static INTERSECTION_MATERIAL_PARAM = {
+  //   color: 0x00ff00,
+  // };
 
 	renderer;
 	scene;
@@ -75,9 +75,11 @@ class ThreeApp {
   offscreenCamera;  // オフスクリーン用のカメラ @@@
   plane;            // 板ポリゴン @@@
   mario;
-  hitMaterial;      // レイが交差した際のマテリアル @@@
+  headwrap;
+  // hitMaterial;      // レイが交差した際のマテリアル @@@
   raycaster;        // レイキャスター @@@
-  open = false;
+  isOPEN = true;
+	rad;
 
 	constructor(wrapper){
 		// renderer
@@ -119,7 +121,7 @@ class ThreeApp {
 		);
 		this.directionalLight.position.copy(ThreeApp.DIRECTIONAL_LIGHT_PARAM.position);
 		this.scene.add(this.directionalLight);
-    this.offscreenScene.add(this.directionalLight);
+    this.offscreenScene.add(this.directionalLight.clone());
 
 		// ambient light
 		this.ambientLight = new THREE.AmbientLight(
@@ -127,27 +129,27 @@ class ThreeApp {
 			ThreeApp.AMBIENT_LIGHT_PARAM.intensity,
 		);
 		this.scene.add(this.ambientLight);
-    this.offscreenScene.add(this.ambientLight);
+    this.offscreenScene.add(this.ambientLight.clone());
 
     //軸ヘルパー
 		const axesBarLength = 10.0;
 		this.axesHelper = new THREE.AxesHelper(axesBarLength);
-    this.offscreenScene.add(this.axesHelper);
+    this.offscreenScene.add(this.axesHelper.clone());
 		this.scene.add(this.axesHelper);
 
 		// control
 		this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-		const bodyMaterial = new THREE.MeshPhongMaterial(ThreeApp.FAN_CONFIG.bodyMaterial);
-		const operationMaterial = new THREE.MeshPhongMaterial(ThreeApp.FAN_CONFIG.operationMaterial);
+		const bodyMaterial = new THREE.MeshPhongMaterial(ThreeApp.MACHINE_CONFIG.bodyMaterial);
+		const operationMaterial = new THREE.MeshPhongMaterial(ThreeApp.MACHINE_CONFIG.operationMaterial);
 
     // マテリアル
-    this.material = new THREE.MeshPhongMaterial(ThreeApp.MATERIAL_PARAM);
-    this.material.map = this.texture;
+    // this.material = new THREE.MeshPhongMaterial(ThreeApp.MATERIAL_PARAM);
+    // this.material.map = this.headwrap;
 
     // 交差時に表示するためのマテリアルを定義 @@@
-    this.hitMaterial = new THREE.MeshPhongMaterial(ThreeApp.INTERSECTION_MATERIAL_PARAM);
-    this.hitMaterial.map = this.texture;
+    // this.hitMaterial = new THREE.MeshPhongMaterial(ThreeApp.INTERSECTION_MATERIAL_PARAM);
+    // this.hitMaterial.map = this.headwrap;
 
 		// machine
     this.machine = new THREE.Group();
@@ -156,7 +158,7 @@ class ThreeApp {
 		// head
 		const headGeometory = new THREE.BoxGeometry(30, 27 , 4);
     const head = new THREE.Mesh(headGeometory, bodyMaterial);
-    head.position.y = 15.5;
+    head.position.y = 15;
     head.position.z = 0;
 		this.machine.add(head);
 
@@ -168,7 +170,7 @@ class ThreeApp {
 		this.machine.add(stand);
 
     // foot
-		const footGeometory = new THREE.BoxGeometry(30, 30, 6);
+		const footGeometory = new THREE.BoxGeometry(30, 30.5, 6);
     const foot = new THREE.Mesh(footGeometory, bodyMaterial);
     this.scene.add(stand);
 
@@ -211,13 +213,12 @@ class ThreeApp {
     directionkeywrap.position.z = 1;
 
     //headwrap
-    const headwrap = new THREE.Group();
-    headwrap.add(head);
-    headwrap.add(stand);
-    headwrap.position.z = -2;
-    // 閉じた時
-    // headwrap.rotation.x = 2.14;
-    this.machine.add(headwrap);
+    this.headwrap = new THREE.Group();
+    this.headwrap.add(head);
+    this.headwrap.add(stand);
+    this.headwrap.position.y = 0;
+    this.headwrap.position.z = -1.18;
+    this.machine.add(this.headwrap);
     
     //footwrap
     const footwrap = new THREE.Group();
@@ -604,13 +605,12 @@ class ThreeApp {
       // レイキャスターに正規化済みマウス座標とカメラを指定する
       this.raycaster.setFromCamera(v, this.camera);
       // scene に含まれるすべてのオブジェクト（ここでは Mesh）を対象にレイキャストする
-      const intersects = this.raycaster.intersectObjects(headwrap);
-      // レイが交差しなかった場合を考慮し一度マテリアルを通常時の状態にリセットしておく
+      const intersects = this.raycaster.intersectObject(this.headwrap);
+
       if (intersects.length > 0) {
-        headwrap.rotation.y += 10;
+        this.isOPEN  = intersects[0].object;
       }
     }, false);
-    
     
     // レンダーターゲットをアスペクト比 1.0 の正方形で生成する @@@
     this.renderTarget = new THREE.WebGLRenderTarget(ThreeApp.RENDER_TARGET_SIZE, ThreeApp.RENDER_TARGET_SIZE);
@@ -627,7 +627,7 @@ class ThreeApp {
     this.scene.add(this.plane);
     this.blackColor = new THREE.Color(0x00ffff);
     this.whiteColor = new THREE.Color(0xffffff);
-    headwrap.add(this.plane);
+    this.headwrap.add(this.plane);
 	}
 	render(){
 		requestAnimationFrame(this.render);
@@ -648,7 +648,19 @@ class ThreeApp {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     // わかりやすくするために、背景を白にしておく
     this.renderer.setClearColor(this.whiteColor, 1.0);
-    // 板ポリゴンが１枚置かれているだけのシーンを描画する
+    // 板ポリゴンが１枚置かれているだけのシーンを描画sする
     this.renderer.render(this.scene, this.camera);
+
+    if(this.isOPEN == true) {
+      this.headwrap.rotation.x = 2.09;
+      this.headwrap.rotation.x += .04;
+    } else {
+      this.headwrap.rotation.x -= .04;
+    }
+    if(this.headwrap.rotation.x < 0) {
+      this.headwrap.rotation.x = 0;
+    } else if(this.headwrap.rotation.x > 50) {
+      this.headwrap.rotation.x = 2.15;
+    }
 	}
 }
