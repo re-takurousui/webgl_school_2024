@@ -76,10 +76,8 @@ class ThreeApp {
   plane;            // 板ポリゴン @@@
   mario;
   headwrap;
-  // hitMaterial;      // レイが交差した際のマテリアル @@@
   raycaster;        // レイキャスター @@@
   isOPEN = true;
-	rad;
 
 	constructor(wrapper){
 		// renderer
@@ -143,14 +141,6 @@ class ThreeApp {
 		const bodyMaterial = new THREE.MeshPhongMaterial(ThreeApp.MACHINE_CONFIG.bodyMaterial);
 		const operationMaterial = new THREE.MeshPhongMaterial(ThreeApp.MACHINE_CONFIG.operationMaterial);
 
-    // マテリアル
-    // this.material = new THREE.MeshPhongMaterial(ThreeApp.MATERIAL_PARAM);
-    // this.material.map = this.headwrap;
-
-    // 交差時に表示するためのマテリアルを定義 @@@
-    // this.hitMaterial = new THREE.MeshPhongMaterial(ThreeApp.INTERSECTION_MATERIAL_PARAM);
-    // this.hitMaterial.map = this.headwrap;
-
 		// machine
     this.machine = new THREE.Group();
 		this.scene.add(this.machine);
@@ -172,7 +162,34 @@ class ThreeApp {
     // foot
 		const footGeometory = new THREE.BoxGeometry(30, 30.5, 6);
     const foot = new THREE.Mesh(footGeometory, bodyMaterial);
-    this.scene.add(stand);
+    this.machine.add(foot);
+
+    //ライトボタン
+    const rightButtonGeometry = new THREE.CylinderGeometry(1, 1, 5);
+    const rightButton = new THREE.Mesh(rightButtonGeometry, operationMaterial);
+    rightButton.position.x = 0;
+    rightButton.position.y = 7;
+    rightButton.position.z = 1;
+    rightButton.rotation.x = 1.55;
+    this.machine.add(rightButton);
+
+    //セレクト、スタートボタン
+    const underButtons = new THREE.Group();
+    const underButtonCount = 2;
+    const underButtonPosition = [
+      {x: 2, y: 0, z: 0},
+      {x: -2, y: 0, z: 0},
+    ];
+    for(let i = 0; i < underButtonCount; i++) {
+      const underButtonGeometry = new THREE.CylinderGeometry(1, 1, 5);
+      const underButton = new THREE.Mesh(underButtonGeometry, operationMaterial);
+      underButton.position.set(underButtonPosition[i].x, underButtonPosition[i].y, underButtonPosition[i].z);
+      underButton.position.x = 0;
+      underButton.position.y = -12;
+      underButton.position.z = 1;
+      underButton.rotation.x = 1.55;
+      underButtons.add(underButton);
+    }
 
     //ABボタン
     const buttonwrap = new THREE.Group();
@@ -219,9 +236,12 @@ class ThreeApp {
     this.headwrap.position.y = 0;
     this.headwrap.position.z = -1.18;
     this.machine.add(this.headwrap);
+    this.headwrap.rotation.x = 2.15;
     
     //footwrap
     const footwrap = new THREE.Group();
+    footwrap.add(underButtons);
+    footwrap.add(rightButton);
     footwrap.add(buttonwrap);
     footwrap.add(directionkeywrap);
     footwrap.add(foot);
@@ -231,7 +251,7 @@ class ThreeApp {
     this.machine.add(footwrap);
     
     
-    //マリオ
+    // マリオ
     this.mario = new THREE.Group();
     const marioCount = 172;
     this.boxGeometry = new THREE.BoxGeometry(.2, .2, 1);
@@ -605,10 +625,14 @@ class ThreeApp {
       // レイキャスターに正規化済みマウス座標とカメラを指定する
       this.raycaster.setFromCamera(v, this.camera);
       // scene に含まれるすべてのオブジェクト（ここでは Mesh）を対象にレイキャストする
-      const intersects = this.raycaster.intersectObject(this.headwrap);
+      const intersects = this.raycaster.intersectObject(this.machine);
 
       if (intersects.length > 0) {
-        this.isOPEN  = intersects[0].object;
+        if(this.isOPEN) {
+          this.isOPEN = false;
+        } else {
+          this.isOPEN = true;
+        }
       }
     }, false);
     
@@ -651,15 +675,14 @@ class ThreeApp {
     // 板ポリゴンが１枚置かれているだけのシーンを描画sする
     this.renderer.render(this.scene, this.camera);
 
-    if(this.isOPEN == true) {
-      this.headwrap.rotation.x = 2.09;
-      this.headwrap.rotation.x += .04;
-    } else {
+    if(this.isOPEN) {
       this.headwrap.rotation.x -= .04;
+    } else {
+      this.headwrap.rotation.x += .04;
     }
     if(this.headwrap.rotation.x < 0) {
       this.headwrap.rotation.x = 0;
-    } else if(this.headwrap.rotation.x > 50) {
+    } else if(this.headwrap.rotation.x > 2.15) {
       this.headwrap.rotation.x = 2.15;
     }
 	}
