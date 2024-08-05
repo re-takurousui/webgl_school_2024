@@ -6,8 +6,6 @@ import { OrbitControls } from './lib/OrbitControls.js';
 window.addEventListener('DOMContentLoaded', async () => {
   const wrapper = document.querySelector('#webgl');
   const app = new ThreeApp(wrapper);
-  // await app.load();
-  // app.init();
   app.render();
 }, false);
 
@@ -77,7 +75,7 @@ class ThreeApp {
   mario;
   headwrap;
   raycaster;        // レイキャスター @@@
-  isOPEN = true;
+  isOPEN = false;
 
 	constructor(wrapper){
 		// renderer
@@ -130,10 +128,10 @@ class ThreeApp {
     this.offscreenScene.add(this.ambientLight.clone());
 
     //軸ヘルパー
-		const axesBarLength = 10.0;
-		this.axesHelper = new THREE.AxesHelper(axesBarLength);
-    this.offscreenScene.add(this.axesHelper.clone());
-		this.scene.add(this.axesHelper);
+		// const axesBarLength = 10.0;
+		// this.axesHelper = new THREE.AxesHelper(axesBarLength);
+    // this.offscreenScene.add(this.axesHelper.clone());
+		// this.scene.add(this.axesHelper);
 
 		// control
 		this.controls = new OrbitControls(this.camera, this.renderer.domElement);
@@ -184,12 +182,12 @@ class ThreeApp {
       const underButtonGeometry = new THREE.CylinderGeometry(1, 1, 5);
       const underButton = new THREE.Mesh(underButtonGeometry, operationMaterial);
       underButton.position.set(underButtonPosition[i].x, underButtonPosition[i].y, underButtonPosition[i].z);
-      underButton.position.x = 0;
-      underButton.position.y = -12;
-      underButton.position.z = 1;
-      underButton.rotation.x = 1.55;
       underButtons.add(underButton);
     }
+    underButtons.position.x = 0;
+    underButtons.position.y = -12;
+    underButtons.position.z = 1;
+    underButtons.rotation.x = 1.55;
 
     //ABボタン
     const buttonwrap = new THREE.Group();
@@ -649,7 +647,7 @@ class ThreeApp {
     this.plane.position.z = 2.1;
     planeMaterial.map = this.renderTarget.texture;
     this.scene.add(this.plane);
-    this.blackColor = new THREE.Color(0x00ffff);
+    this.blackColor = new THREE.Color(0x00d5ff);
     this.whiteColor = new THREE.Color(0xffffff);
     this.headwrap.add(this.plane);
 	}
