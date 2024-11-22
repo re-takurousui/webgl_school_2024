@@ -4,7 +4,7 @@ import { WebGLUtility } from './lib/webgl.js';
 import { Vec3, Mat4 } from './lib/math.js';
 import { WebGLGeometry } from './lib/geometry.js';
 import { WebGLOrbitCamera } from './lib/camera.js';
-import { Pane } from './lib/tweakpane-4.0.3.min.js';
+// import { Pane } from './lib/tweakpane-4.0.3.min.js';
 
 window.addEventListener('DOMContentLoaded', async () => {
   const app = new App();
@@ -118,36 +118,36 @@ onMouseMove(event) {
   // /**
   //  * tweakpane の初期化処理
   //  */
-  setupPane() {
-    // Tweakpane を使った GUI の設定
-    const pane = new Pane();
-    const parameter = {
-      timeSpeed: this.timeSpeed,
-      noiseDistortion: this.noiseDistortion,
-      noiseVisible: this.noiseVisible,
-    };
-    // 時間の経過に掛かる係数
-    pane.addBinding(parameter, 'timeSpeed', {
-      min: 0.0,
-      max: 2.0,
-    })
-    .on('change', (v) => {
-      this.timeSpeed = v.value;
-    });
-    // ノイズの歪み係数 @@@
-    pane.addBinding(parameter, 'noiseDistortion', {
-      min: 0.0,
-      max: 1.0,
-    })
-    .on('change', (v) => {
-      this.noiseDistortion = v.value;
-    });
-    // ノイズの可視化状態 @@@
-    pane.addBinding(parameter, 'noiseVisible')
-    .on('change', (v) => {
-      this.noiseVisible = v.value;
-    });
-  }
+  // setupPane() {
+  //   // Tweakpane を使った GUI の設定
+  //   const pane = new Pane();
+  //   const parameter = {
+  //     timeSpeed: this.timeSpeed,
+  //     noiseDistortion: this.noiseDistortion,
+  //     noiseVisible: this.noiseVisible,
+  //   };
+  //   // 時間の経過に掛かる係数
+  //   pane.addBinding(parameter, 'timeSpeed', {
+  //     min: 0.0,
+  //     max: 2.0,
+  //   })
+  //   .on('change', (v) => {
+  //     this.timeSpeed = v.value;
+  //   });
+  //   // ノイズの歪み係数 @@@
+  //   pane.addBinding(parameter, 'noiseDistortion', {
+  //     min: 0.0,
+  //     max: 1.0,
+  //   })
+  //   .on('change', (v) => {
+  //     this.noiseDistortion = v.value;
+  //   });
+  //   // ノイズの可視化状態 @@@
+  //   pane.addBinding(parameter, 'noiseVisible')
+  //   .on('change', (v) => {
+  //     this.noiseVisible = v.value;
+  //   });
+  // }
 
   /**
    * リサイズ処理
