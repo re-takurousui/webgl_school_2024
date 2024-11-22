@@ -232,57 +232,57 @@ class ThreeApp {
     this.slider03.position.x = 0.7;
     this.slider03.rotation.z = -1.5;
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if(entry.isIntersecting) {
-          // gsap.to(mat, {
-          //   opacity: 0,
-          //   duration: 2, // 2秒かけて変化
-          //   onComplete: () => {
-          //     console.log('アニメーション終了');
-          //   },
-          // });
-          gsap.to(this.slider01.children, {
-            opacity: 0,
-            duration: 2, // アニメーションの時間（秒）
-            onStart: () => {
-              // 透明度を制御可能にするため、すべてのマテリアルのtransparentをtrueに設定
-              this.slider01.children.forEach((child) => {
-                if (child.material) {
-                  child.material.transparent = true;
-                }
-              });
-            },
-            onComplete: () => {
-              // アニメーション完了後に非表示
-              this.slider01.visible = true;
-            },
-          });
-          console.log('表');
-        } else {
-          console.log('消える');
-          gsap.to(this.slider01.children, {
-            opacity: 0,
-            duration: 2, // アニメーションの時間（秒）
-            onStart: () => {
-              // 透明度を制御可能にするため、すべてのマテリアルのtransparentをtrueに設定
-              this.slider01.children.forEach((child) => {
-                if (child.material) {
-                  child.material.transparent = true;
-                }
-              });
-            },
-            onComplete: () => {
-              // アニメーション完了後に非表示
-              this.slider01.visible = false;
-            },
-          });
-        }
-      });
-    }, {
-      rootMargin: '0% 0% 0% 0%',
-    });
-    observer.observe(document.querySelector('.fv'));
+    // const observer = new IntersectionObserver((entries) => {
+    //   entries.forEach((entry) => {
+    //     if(entry.isIntersecting) {
+    //       // gsap.to(mat, {
+    //       //   opacity: 0,
+    //       //   duration: 2, // 2秒かけて変化
+    //       //   onComplete: () => {
+    //       //     console.log('アニメーション終了');
+    //       //   },
+    //       // });
+    //       gsap.to(this.slider01.children, {
+    //         opacity: 0,
+    //         duration: 2, // アニメーションの時間（秒）
+    //         onStart: () => {
+    //           // 透明度を制御可能にするため、すべてのマテリアルのtransparentをtrueに設定
+    //           this.slider01.children.forEach((child) => {
+    //             if (child.material) {
+    //               child.material.transparent = true;
+    //             }
+    //           });
+    //         },
+    //         onComplete: () => {
+    //           // アニメーション完了後に非表示
+    //           this.slider01.visible = true;
+    //         },
+    //       });
+    //       console.log('表');
+    //     } else {
+    //       console.log('消える');
+    //       gsap.to(this.slider01.children, {
+    //         opacity: 0,
+    //         duration: 2, // アニメーションの時間（秒）
+    //         onStart: () => {
+    //           // 透明度を制御可能にするため、すべてのマテリアルのtransparentをtrueに設定
+    //           this.slider01.children.forEach((child) => {
+    //             if (child.material) {
+    //               child.material.transparent = true;
+    //             }
+    //           });
+    //         },
+    //         onComplete: () => {
+    //           // アニメーション完了後に非表示
+    //           this.slider01.visible = false;
+    //         },
+    //       });
+    //     }
+    //   });
+    // }, {
+    //   rootMargin: '0% 0% 0% 0%',
+    // });
+    // observer.observe(document.querySelector('.fv'));
   }
   
   //描画
