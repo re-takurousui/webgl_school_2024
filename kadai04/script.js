@@ -334,7 +334,7 @@ class ThreeApp {
     return deg * Math.PI / 180;
   }
   render() {
-    // this.moveLine();
+    this.moveLine();
     requestAnimationFrame(this.render);
     // this.controls.update();
     this.renderer.render(this.scene, this.camera);
