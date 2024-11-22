@@ -1,0 +1,6 @@
+.docker/
+.envrc
+docker/mysql/data/ib_logfile[0-9]
+docker/mysql/data/ibtmp[0-9]
+node_modules/
+yarn-error.log
