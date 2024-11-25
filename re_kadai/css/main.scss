@@ -275,83 +275,6 @@ img {
                 }
             }
         }
-        // &__scene--1 {
-        //     flex-direction: row-reverse;
-        //     .s--orange {
-        //         position: absolute;
-        //         top: calc(50% - 117rem);
-        //         left: calc(50% - 8rem);
-        //         width: 128.8rem;
-        //         transform-origin: left top;
-        //         rotate: -311deg;
-        //     }
-        //     .s--blue {
-        //         position: absolute;
-        //         top: calc(50% - 54.8rem);
-        //         right: calc(50% + 56rem);
-        //         transform-origin: right top;
-        //         rotate: -32deg;
-        //         width: 60.5rem;
-        //     }
-        //     .s--gray {
-        //         position: absolute;
-        //         top: calc(50% - 121rem);
-        //         left: calc(50% - 15rem);
-        //         width: 109.2rem;
-        //     }
-        // }
-        // &__scene--2 {
-        //     .s--orange {
-        //         position: absolute;
-        //         top: calc(50% - 85rem);
-        //         right: calc(50% + 17.3rem);
-        //         width: 60.5rem;
-        //         transform-origin: right top;
-        //         rotate: -32deg;
-        //     }
-        //     .s--blue {
-        //         position: absolute;
-        //         top: calc(50% - 84.5rem);
-        //         left: calc(50% + 25rem);
-        //         transform-origin: left top;
-        //         rotate: 43.53deg;
-        //         width: 124rem;
-        //     }
-        //     .s--gray {
-        //         position: absolute;
-        //         top: calc(50% - 92.7rem);
-        //         left: calc(50% + 46.6rem);
-        //         transform-origin: left top;
-        //         rotate: 105deg;
-        //         width: 130rem;
-        //     }
-        // }
-        // &__scene--3 {
-        //     .s--orange {
-        //         position: absolute;
-        //         top: calc(50% - 79.6rem);
-        //         right: calc(50% - 20rem);
-        //         transform-origin: right top;
-        //         rotate: -13deg;
-        //         width: 124rem;
-        //     }
-        //     .s--blue {
-        //         position: absolute;
-        //         top: calc(50% - 76.7rem);
-        //         left: calc(50% + 0rem);
-        //         transform-origin: right top;
-        //         rotate: -39deg;
-        //         width: 67.5rem;
-        //     }
-        //     .s--gray {
-        //         position: absolute;
-        //         top: calc(50% - 180rem);
-        //         left: calc(50% - 10rem);
-        //         transform-origin: left top;
-        //         rotate: 59.65deg;
-        //         width: 262rem;
-        //     }
-        // }
     }
 }
 @keyframes scroll {
@@ -748,9 +671,9 @@ img {
             height: 68.5rem;
             img {
                 clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+                transition: clip-path 1.2s ease-out 0s;
             }
             &.visibled img {
-                // transition: clip-path .4s*3 ease-out 0s;
                 clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
             }
         }

@@ -638,6 +638,9 @@ img {
 .service__img-block img {
   -webkit-clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
           clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+  transition: -webkit-clip-path 1.2s ease-out 0s;
+  transition: clip-path 1.2s ease-out 0s;
+  transition: clip-path 1.2s ease-out 0s, -webkit-clip-path 1.2s ease-out 0s;
 }
 .service__img-block.visibled img {
   -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
