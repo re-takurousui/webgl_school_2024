@@ -4,7 +4,7 @@ import * as THREE from './lib/three.module.js';
 import { OrbitControls } from './lib/OrbitControls.js';
 
 window.addEventListener('DOMContentLoaded', async () => {
-  const wrapper = document.querySelector('#webgl');
+  const wrapper = document.querySelector('#bg');
   const app = new ThreeApp(wrapper);
   app.init();
   app.createLine();
