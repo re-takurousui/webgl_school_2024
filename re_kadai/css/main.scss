@@ -388,7 +388,7 @@ img {
         opacity: 1;
         scale: (.3);
         &.visibled {
-            // transition: opacity .4s g.$delay ease-out, scale .4s g.$delay ease-out;
+            transition: opacity .4s .4s ease-out, scale .4s .4s ease-out;
             opacity: 1;
             scale: (1);
         }
