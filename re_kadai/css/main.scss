@@ -133,8 +133,8 @@ img {
 .head2 {
     width: fit-content;
     clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+    transition: clip-path .7s ease-out 0s;
     &.visibled {
-        transition: clip-path .7s ease-out 0s;
         clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     }
 }
@@ -194,8 +194,8 @@ img {
         padding-bottom: 9.5rem;
         opacity: 0;
         transform: translateY(3rem);
+        transition: opacity .8s ease-out, transform .8s ease-out;
         &.visibled {
-            transition: opacity .8s ease-out, transform .8s ease-out;
             opacity: 1;
             transform: translateY(0);
         }
@@ -387,8 +387,8 @@ img {
         z-index: 1;
         opacity: 1;
         scale: (.3);
+        transition: opacity .4s .4s ease-out, scale .4s .4s ease-out;
         &.visibled {
-            transition: opacity .4s .4s ease-out, scale .4s .4s ease-out;
             opacity: 1;
             scale: (1);
         }
