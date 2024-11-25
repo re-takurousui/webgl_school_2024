@@ -56,7 +56,7 @@ class ThreeApp {
   directionalLight; // 平行光源（ディレクショナルライト）
   ambientLight;     // 環境光（アンビエントライト）
   controls;         // オービットコントロール
-  axesHelper;       // 軸ヘルパー
+  // axesHelper;       // 軸ヘルパー
   line;
   mat;
   geo;
@@ -148,9 +148,9 @@ class ThreeApp {
     // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
     // ヘルパー
-    const axesBarLength = 5.0;
-    this.axesHelper = new THREE.AxesHelper(axesBarLength);
-    this.scene.add(this.axesHelper);
+    // const axesBarLength = 5.0;
+    // this.axesHelper = new THREE.AxesHelper(axesBarLength);
+    // this.scene.add(this.axesHelper);
   }
   //線
   createLine() {
