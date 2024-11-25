@@ -49,3 +49,15 @@ aboutImgs.forEach((aboutImg) => {
   });
   aboutObserver.observe(aboutImg);
 });
+const serviceImg = document.querySelector(".service__img-block");
+const serviceObserver = new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+        if( entry.isIntersecting ) {
+            serviceImg.classList.add("visibled");
+            serviceObserver.unobserve(serviceImg);
+        }
+    });
+}, {
+    rootMargin: '-20% 0% -20% 0%',
+});
+serviceObserver.observe(serviceImg);
