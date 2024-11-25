@@ -34,3 +34,18 @@ headings.forEach((heading) => {
     });
     headObserver.observe(heading);
 });
+
+const aboutImgs = document.querySelectorAll(".about__img");
+aboutImgs.forEach((aboutImg) => {
+  const aboutObserver = new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+        if( entry.isIntersecting ) {
+            aboutImg.classList.add("visibled");
+            Observer.unobserve(aboutImg);
+        } 
+    });
+  }, {
+    rootMargin: '0% 0% -20% 0%'
+  });
+  aboutObserver.observe(aboutImg);
+});
