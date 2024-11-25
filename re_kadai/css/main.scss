@@ -387,7 +387,7 @@ img {
         z-index: 1;
         opacity: 1;
         scale: (.3);
-        transition: opacity .4s .4s ease-out, scale .4s .4s ease-out;
+        transition: opacity .4s ease-out .4s, scale .4s ease-out .4s;
         &.visibled {
             opacity: 1;
             scale: (1);
