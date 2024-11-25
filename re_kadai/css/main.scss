@@ -383,9 +383,9 @@ img {
     z-index: 1;
     &__img {
         position: absolute;
-        display: inline-block;
+        display: block;
         z-index: 1;
-        opacity: 1;
+        opacity: 0;
         scale: (.3);
         transition: opacity .4s ease-out .4s, scale .4s ease-out .4s;
         &.visibled {
