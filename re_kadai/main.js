@@ -41,7 +41,7 @@ aboutImgs.forEach((aboutImg) => {
     entries.forEach((entry)=>{
         if( entry.isIntersecting ) {
             aboutImg.classList.add("visibled");
-            Observer.unobserve(aboutImg);
+            aboutObserver.unobserve(aboutImg);
         } 
     });
   }, {
