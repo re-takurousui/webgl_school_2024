@@ -49,6 +49,7 @@ aboutImgs.forEach((aboutImg) => {
   });
   aboutObserver.observe(aboutImg);
 });
+
 const serviceImg = document.querySelector(".service__img-block");
 const serviceObserver = new IntersectionObserver((entries)=>{
     entries.forEach((entry)=>{
